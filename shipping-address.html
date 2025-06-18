@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收货地址 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 max-w-414 mx-auto font-sans pb-28">
+
+    <header class="bg-white p-4 border-b sticky top-0 z-30 flex items-center">
+        <a href="profile.html" class="text-brand-green mr-4"><i class="fas fa-arrow-left"></i></a>
+        <h1 class="text-xl font-bold text-brand-green text-center flex-grow">收货地址</h1>
+        <div class="w-6"></div> <!-- Placeholder for centering -->
+    </header>
+
+    <main class="p-4 space-y-4">
+        <!-- Address Item 1 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="font-semibold text-gray-800">张三 <span class="ml-2 text-sm text-gray-500">138****1234</span></p>
+                    <p class="text-sm text-gray-600 mt-1">北京市东城区长安街1号 幸福小区 5号楼 101室</p>
+                </div>
+                <button class="text-gray-400 hover:text-brand-green text-sm"><i class="fas fa-edit"></i></button>
+            </div>
+            <div class="border-t mt-3 pt-3 flex justify-between items-center">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="default_address" checked class="form-radio text-brand-green focus:ring-brand-green">
+                    <span class="text-sm text-gray-700">默认地址</span>
+                </label>
+                <button class="text-red-500 hover:text-red-700 text-sm"><i class="fas fa-trash-alt mr-1"></i> 删除</button>
+            </div>
+        </div>
+
+        <!-- Address Item 2 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="font-semibold text-gray-800">李四 <span class="ml-2 text-sm text-gray-500">139****5678</span></p>
+                    <p class="text-sm text-gray-600 mt-1">上海市浦东新区世纪大道88号 国际金融中心 20层 A座</p>
+                </div>
+                <button class="text-gray-400 hover:text-brand-green text-sm"><i class="fas fa-edit"></i></button>
+            </div>
+            <div class="border-t mt-3 pt-3 flex justify-between items-center">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="default_address" class="form-radio text-brand-green focus:ring-brand-green">
+                    <span class="text-sm text-gray-700">设为默认</span>
+                </label>
+                <button class="text-red-500 hover:text-red-700 text-sm"><i class="fas fa-trash-alt mr-1"></i> 删除</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 max-w-414 mx-auto z-30">
+        <a href="add-address.html" class="block w-full bg-brand-green hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center">
+            <i class="fas fa-plus mr-2"></i>新增收货地址
+        </a>
+    </footer>
+
+    <!-- Bottom Navigation Bar -->
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Placeholder for address interactions
+        document.querySelectorAll('div.bg-white.rounded-lg.shadow.p-4 button').forEach(button => {
+            button.addEventListener('click', function() {
+                const actionText = this.textContent.trim();
+                const iconClass = this.querySelector('i')?.classList;
+
+                if (actionText.includes('删除')) {
+                    if(confirm('确认删除该地址吗？')) {
+                        this.closest('.bg-white.rounded-lg').remove();
+                        // Add logic to update backend
+                        alert('地址已删除 (原型功能)');
+                    }
+                } else if (iconClass && iconClass.contains('fa-edit')) {
+                     alert('跳转到编辑地址页面 (原型功能)');
+                     // window.location.href = 'edit-address.html?id=...'; // Example navigation
+                }
+            });
+        });
+        document.querySelectorAll('input[name="default_address"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('input[name="default_address"]').forEach(r => {
+                    r.closest('label').querySelector('span').textContent = '设为默认';
+                });
+                this.closest('label').querySelector('span').textContent = '默认地址';
+                alert('默认地址已更新 (原型功能)');
+                // Add logic to update backend
+            });
+        });
+    </script>
+</body>
+</html>

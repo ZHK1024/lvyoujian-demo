@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优惠券与邀请 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 max-w-414 mx-auto font-sans pb-20">
+
+    <header class="bg-white p-4 border-b sticky top-0 z-30 flex items-center">
+        <a href="profile.html" class="text-brand-green mr-4"><i class="fas fa-arrow-left"></i></a>
+        <h1 class="text-xl font-bold text-brand-green text-center flex-grow">优惠券与邀请</h1>
+        <div class="w-6"></div> <!-- Placeholder for centering -->
+    </header>
+
+    <main class="p-4 space-y-6">
+        <section class="bg-white rounded-lg shadow p-6 text-center">
+            <h2 class="text-lg font-semibold text-brand-green mb-3">我的优惠券</h2>
+            <div class="border-t border-b py-8 my-4 border-dashed">
+                <p class="text-gray-400 text-2xl">暂无可用优惠券</p>
+                <p class="text-sm text-gray-400 mt-2">敬请期待更多活动</p>
+            </div>
+            <!-- <button class="text-brand-green hover:underline text-sm">查看已失效优惠券</button> -->
+        </section>
+
+        <section class="bg-white rounded-lg shadow p-6 text-center">
+            <h2 class="text-lg font-semibold text-brand-green mb-4">邀请好友得好礼</h2>
+            <p class="text-sm text-gray-600 mb-1">您的专属邀请链接：</p>
+            <div class="bg-gray-100 p-3 rounded-md mb-4">
+                <span id="invite-link" class="text-sm text-gray-700 break-all">https://greenmail.example.com/invite?code=USER123XYZ</span>
+            </div>
+            <button id="copy-invite-link-button" class="w-full bg-brand-green hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                <i class="fas fa-copy mr-2"></i>复制邀请链接
+            </button>
+            <p id="copy-feedback" class="text-sm text-green-600 mt-2 h-4"></p> <!-- Feedback message area -->
+        </section>
+    </main>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

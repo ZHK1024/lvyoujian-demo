@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 max-w-414 mx-auto font-sans pb-20">
+
+    <header class="bg-white p-4 border-b sticky top-0 z-30 flex items-center">
+        <a href="profile.html" class="text-brand-green mr-4"><i class="fas fa-arrow-left"></i></a>
+        <h1 class="text-xl font-bold text-brand-green text-center flex-grow">我的订单</h1>
+        <div class="w-6"></div> <!-- Placeholder for centering -->
+    </header>
+
+    <main class="p-4 space-y-4">
+        <!-- Order Item 1 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-500">订单号: GM20250616001</span>
+                <span class="text-sm text-yellow-500 font-semibold">待付款</span>
+            </div>
+            <div class="border-t pt-2">
+                <div class="flex items-center mb-2">
+                    <img src="/assets/images/tea.png" alt="商品图片" class="w-16 h-16 rounded mr-3">
+                    <div>
+                        <h3 class="text-md font-semibold text-gray-800">春季茶韵盒 - 月度订阅</h3>
+                        <p class="text-xs text-gray-500">1件</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-700">总计: <span class="text-brand-green font-bold">¥99.00</span></p>
+                    <a href="order-detail.html?orderId=GM20250616001" class="mt-2 inline-block bg-yellow-400 text-white px-3 py-1 text-xs rounded-md hover:bg-yellow-500 transition-colors">去支付</a>
+                    <a href="order-detail.html?orderId=GM20250616001" class="mt-2 ml-2 inline-block bg-gray-200 text-gray-700 px-3 py-1 text-xs rounded-md hover:bg-gray-300 transition-colors">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Item 2 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-500">订单号: GM20250510003</span>
+                <span class="text-sm text-green-500 font-semibold">已完成</span>
+            </div>
+            <div class="border-t pt-2">
+                <div class="flex items-center mb-2">
+                    <img src="/assets/images/tea.png" alt="商品图片" class="w-16 h-16 rounded mr-3">
+                    <div>
+                        <h3 class="text-md font-semibold text-gray-800">自定义茶叶组合</h3>
+                        <p class="text-xs text-gray-500">西湖龙井, 祁门红茶</p>
+                    </div>
+                </div>
+                 <div class="text-right">
+                    <p class="text-sm text-gray-700">总计: <span class="text-brand-green font-bold">¥128.00</span></p>
+                    <a href="order-detail.html?orderId=GM20250510003" class="mt-2 inline-block bg-gray-200 text-gray-700 px-3 py-1 text-xs rounded-md hover:bg-gray-300 transition-colors">查看详情</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Order Item 3 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-500">订单号: GM20250401002</span>
+                <span class="text-sm text-gray-500 font-semibold">已取消</span>
+            </div>
+            <div class="border-t pt-2">
+                <div class="flex items-center mb-2">
+                    <img src="/assets/images/tea.png" alt="商品图片" class="w-16 h-16 rounded mr-3">
+                    <div>
+                        <h3 class="text-md font-semibold text-gray-800">新手入门茶具套装</h3>
+                        <p class="text-xs text-gray-500">1套</p>
+                    </div>
+                </div>
+                 <div class="text-right">
+                    <p class="text-sm text-gray-700">总计: <span class="text-brand-green font-bold">¥199.00</span></p>
+                     <a href="#" class="mt-2 inline-block bg-gray-200 text-gray-700 px-3 py-1 text-xs rounded-md hover:bg-gray-300 transition-colors">再次购买</a>
+                     <a href="order-detail.html?orderId=GM20250401002" class="mt-2 ml-2 inline-block bg-gray-200 text-gray-700 px-3 py-1 text-xs rounded-md hover:bg-gray-300 transition-colors">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center text-gray-400 text-sm pt-4">--- 没有更多订单了 ---</p>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

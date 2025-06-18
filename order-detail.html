@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单详情 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                        'brand-light-green': '#E6F2E9',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 max-w-414 mx-auto font-sans">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-414 mx-auto px-4 py-3 flex items-center">
+            <a href="my-orders.html" class="text-brand-green">
+                <i class="fas fa-chevron-left text-lg"></i>
+            </a>
+            <h1 class="text-lg font-semibold text-gray-800 mx-auto">订单详情</h1>
+            <div class="w-6"></div> <!-- Placeholder for alignment -->
+        </div>
+    </header>
+
+    <!-- Order Details -->
+    <main class="pb-4">
+        <!-- Order Status & Delivery Info -->
+        <section class="bg-brand-green text-white p-5">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-xl font-semibold" id="order-status">待付款</h2>
+                <p class="text-sm">订单号: <span id="order-number">2024072610086</span></p>
+            </div>
+            <div class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 mr-3 text-lg"></i>
+                <div>
+                    <p class="font-medium" id="shipping-recipient">张三, 138****1234</p>
+                    <p class="text-sm" id="shipping-address-full">北京市海淀区中关村南大街27号中央民族大学</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product List -->
+        <section class="bg-white mt-3 mb-3">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="text-md font-semibold text-gray-700">商品信息</h3>
+            </div>
+            <div id="order-items-container" class="divide-y divide-gray-200">
+                <!-- Item 1: Subscription -->
+                <div class="p-4 flex items-start space-x-4">
+                    <img src="/assets/images/tea.png" alt="商品图片" class="w-20 h-20 rounded object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-800">尊享品鉴·按月订购</h4>
+                        <p class="text-sm text-gray-500">规格: 3个月</p>
+                        <p class="text-sm text-gray-500">茶叶偏好: 随机惊喜</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold text-brand-green">¥299.00</p>
+                        <p class="text-sm text-gray-500">x1</p>
+                    </div>
+                </div>
+                <!-- Item 2: Single Product -->
+                <div class="p-4 flex items-start space-x-4">
+                    <img src="/assets/images/tea.png" alt="商品图片" class="w-20 h-20 rounded object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-800">景德镇手工茶具套装</h4>
+                        <p class="text-sm text-gray-500">颜色: 青釉</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold text-brand-green">¥188.00</p>
+                        <p class="text-sm text-gray-500">x1</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Price Summary -->
+        <section class="bg-white p-4 space-y-2 mb-3">
+            <div class="flex justify-between text-sm text-gray-700">
+                <span>商品总额</span>
+                <span id="subtotal">¥299.00</span>
+            </div>
+            <div class="flex justify-between text-sm text-gray-700">
+                <span>运费</span>
+                <span id="shipping-fee">¥0.00</span>
+            </div>
+            <!-- <div class="flex justify-between text-sm text-gray-700">
+                <span>优惠券</span>
+                <span id="coupon-discount" class="text-red-500">-¥10.00</span>
+            </div> -->
+            <div class="flex justify-between font-semibold text-gray-800 border-t pt-2 mt-2">
+                <span>实付款</span>
+                <span id="total-paid" class="text-brand-green text-lg">¥299.00</span>
+            </div>
+        </section>
+
+        <!-- Order Information -->
+        <section class="bg-white p-4 space-y-1 text-sm text-gray-600">
+            <p>订单编号: <span id="info-order-number">2024072610086</span> <button class="ml-2 text-brand-green text-xs">复制</button></p>
+            <p>下单时间: <span id="info-order-time">2024-07-26 10:30:00</span></p>
+            <p>支付方式: <span id="info-payment-method">微信支付</span></p>
+            <p>配送方式: <span id="info-shipping-method">快递配送</span></p>
+            <p>买家留言: <span id="info-buyer-message">希望尽快发货，谢谢！</span></p>
+        </section>
+
+        <!-- Action Buttons (Conditional) -->
+        <section id="order-actions" class="bg-white p-4 mt-3 flex justify-end space-x-3">
+            <!-- Example for "待付款" status -->
+            <button class="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">取消订单</button>
+            <button class="px-6 py-2 bg-brand-green text-white rounded-md text-sm hover:bg-green-700">立即付款</button>
+            
+            <!-- Example for "待收货" status -->
+            <!-- <button class="px-4 py-2 border border-brand-green rounded-md text-sm text-brand-green hover:bg-brand-light-green">查看物流</button> -->
+            <!-- <button class="px-6 py-2 bg-brand-green text-white rounded-md text-sm hover:bg-green-700">确认收货</button> -->
+
+            <!-- Example for "已完成" status -->
+            <!-- <button class="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">申请售后</button> -->
+            <!-- <button class="px-4 py-2 border border-brand-green rounded-md text-sm text-brand-green hover:bg-brand-light-green">再次购买</button> -->
+        </section>
+    </main>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dummy data - in a real app, this would come from a server based on order ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('orderId') || '2024072610086'; // Default for prototype
+
+            const orderData = {
+                '2024072610086': {
+                    status: '待付款',
+                    recipient: '张三, 138****1234',
+                    address: '北京市海淀区中关村南大街27号中央民族大学',
+                    items: [
+                        { name: '尊享品鉴·按年订购', spec: '12个月', preference: '随机惊喜', price: 299.00, qty: 1, img: '/assets/images/tea.png' },
+                        // { name: '景德镇手工茶具套装', spec: '颜色: 青釉', preference: null, price: 188.00, qty: 1, img: '/assets/images/tea.png' }
+                    ],
+                    subtotal: 299.00,
+                    shippingFee: 0.00,
+                    couponDiscount: -10.00,
+                    totalPaid: 477.00,
+                    orderTime: '2024-07-26 10:30:00',
+                    paymentMethod: '微信支付',
+                    shippingMethod: '快递配送',
+                    buyerMessage: '希望尽快发货，谢谢！'
+                },
+                '2024072510080': {
+                    status: '待收货',
+                    recipient: '李四, 139****5678',
+                    address: '上海市浦东新区世纪大道100号',
+                    items: [
+                        { name: '特级龙井·春茶限定', spec: '250g礼盒装', preference: null, price: 350.00, qty: 1, img: '/assets/images/tea.png' }
+                    ],
+                    subtotal: 350.00,
+                    shippingFee: 10.00,
+                    couponDiscount: 0,
+                    totalPaid: 360.00,
+                    orderTime: '2024-07-25 15:00:00',
+                    paymentMethod: '支付宝',
+                    shippingMethod: '顺丰速运',
+                    buyerMessage: '请包装好一点。',
+                }
+            };
+
+            const currentOrder = orderData[orderId] || orderData['2024072610086']; // Fallback to default
+
+            document.getElementById('order-status').textContent = currentOrder.status;
+            document.getElementById('order-number').textContent = orderId;
+            document.getElementById('shipping-recipient').textContent = currentOrder.recipient;
+            document.getElementById('shipping-address-full').textContent = currentOrder.address;
+            
+            const itemsContainer = document.getElementById('order-items-container');
+            itemsContainer.innerHTML = ''; // Clear static items
+            currentOrder.items.forEach(item => {
+                const itemHtml = `
+                    <div class="p-4 flex items-start space-x-4">
+                        <img src="${item.img}" alt="${item.name}" class="w-20 h-20 rounded object-cover">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800">${item.name}</h4>
+                            <p class="text-sm text-gray-500">${item.spec}</p>
+                            ${item.preference ? `<p class="text-sm text-gray-500">茶叶偏好: ${item.preference}</p>` : ''}
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold text-brand-green">¥${item.price.toFixed(2)}</p>
+                            <p class="text-sm text-gray-500">x${item.qty}</p>
+                        </div>
+                    </div>
+                `;
+                itemsContainer.innerHTML += itemHtml;
+            });
+
+            document.getElementById('subtotal').textContent = `¥${currentOrder.subtotal.toFixed(2)}`;
+            document.getElementById('shipping-fee').textContent = `¥${currentOrder.shippingFee.toFixed(2)}`;
+            document.getElementById('coupon-discount').textContent = currentOrder.couponDiscount === 0 ? '无' : `-¥${Math.abs(currentOrder.couponDiscount).toFixed(2)}`;
+            if(currentOrder.couponDiscount === 0) document.getElementById('coupon-discount').classList.remove('text-red-500');
+            document.getElementById('total-paid').textContent = `¥${currentOrder.totalPaid.toFixed(2)}`;
+
+            document.getElementById('info-order-number').firstChild.textContent = orderId + ' '; // Keep button
+            document.getElementById('info-order-time').textContent = currentOrder.orderTime;
+            document.getElementById('info-payment-method').textContent = currentOrder.paymentMethod;
+            document.getElementById('info-shipping-method').textContent = currentOrder.shippingMethod;
+            document.getElementById('info-buyer-message').textContent = currentOrder.buyerMessage || '无';
+
+            // Update action buttons based on status
+            const actionsContainer = document.getElementById('order-actions');
+            actionsContainer.innerHTML = ''; // Clear static buttons
+            if (currentOrder.status === '待付款') {
+                actionsContainer.innerHTML = `
+                    <button class="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">取消订单</button>
+                    <button class="px-6 py-2 bg-brand-green text-white rounded-md text-sm hover:bg-green-700">立即付款</button>
+                `;
+            } else if (currentOrder.status === '待发货') {
+                 actionsContainer.innerHTML = `<button class="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">提醒发货</button>`;
+            } else if (currentOrder.status === '待收货') {
+                actionsContainer.innerHTML = `
+                    <button class="px-4 py-2 border border-brand-green rounded-md text-sm text-brand-green hover:bg-brand-light-green">查看物流</button>
+                    <button class="px-6 py-2 bg-brand-green text-white rounded-md text-sm hover:bg-green-700">确认收货</button>
+                `;
+            } else if (currentOrder.status === '已完成' || currentOrder.status === '已取消') {
+                actionsContainer.innerHTML = `
+                    <button class="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">删除订单</button>
+                    <button class="px-4 py-2 border border-brand-green rounded-md text-sm text-brand-green hover:bg-brand-light-green">再次购买</button>
+                `;
+                 if(currentOrder.status === '已完成') {
+                    const applyAfterSales = document.createElement('button');
+                    applyAfterSales.className = "px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50";
+                    applyAfterSales.textContent = "申请售后";
+                    actionsContainer.insertBefore(applyAfterSales, actionsContainer.firstChild);
+                 }
+            }
+
+            // Add event listener for copying order number
+            const copyButton = document.querySelector('#info-order-number button');
+            if(copyButton) {
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(orderId).then(() => {
+                        alert('订单号已复制!');
+                    }).catch(err => {
+                        alert('复制失败');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增收货地址 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                        'brand-light-green': '#E6F2E9',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 max-w-414 mx-auto font-sans">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-414 mx-auto px-4 py-3 flex items-center">
+            <a href="shipping-address.html" class="text-brand-green">
+                <i class="fas fa-chevron-left text-lg"></i>
+            </a>
+            <h1 class="text-lg font-semibold text-gray-800 mx-auto">新增收货地址</h1>
+            <div class="w-6"></div> <!-- Placeholder for alignment -->
+        </div>
+    </header>
+
+    <!-- Add Address Form -->
+    <main class="p-4 pb-20">
+        <form id="add-address-form" class="space-y-5">
+            <div>
+                <label for="recipient-name" class="block text-sm font-medium text-gray-700 mb-1">收货人</label>
+                <input type="text" id="recipient-name" name="recipient-name" placeholder="请填写收货人姓名" class="w-full p-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green">
+            </div>
+            <div>
+                <label for="phone-number" class="block text-sm font-medium text-gray-700 mb-1">手机号码</label>
+                <input type="tel" id="phone-number" name="phone-number" placeholder="请填写收货人手机号码" class="w-full p-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green">
+            </div>
+            <div>
+                <label for="region" class="block text-sm font-medium text-gray-700 mb-1">所在地区</label>
+                <input type="text" id="region" name="region" placeholder="省市区县、乡镇等" class="w-full p-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green">
+            </div>
+            <div>
+                <label for="detailed-address" class="block text-sm font-medium text-gray-700 mb-1">详细地址</label>
+                <textarea id="detailed-address" name="detailed-address" rows="3" placeholder="街道、楼牌号等" class="w-full p-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <label for="set-default" class="text-sm font-medium text-gray-700">设为默认地址</label>
+                <button type="button" id="default-address-toggle" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-200 ease-in-out focus:outline-none bg-gray-200">
+                    <span class="sr-only">设为默认地址</span>
+                    <span id="default-address-toggle-circle" class="inline-block w-5 h-5 transform bg-white rounded-full transition-transform duration-200 ease-in-out translate-x-0.5"></span>
+                </button>
+                <input type="checkbox" id="set-default" name="set-default" class="hidden">
+            </div>
+        </form>
+    </main>
+
+    <!-- Fixed Bottom Button -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 max-w-414 mx-auto">
+        <button type="submit" form="add-address-form" class="w-full bg-brand-green text-white py-3 rounded-md font-semibold hover:bg-green-700 transition">
+            保存地址
+        </button>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('default-address-toggle');
+            const toggleCircle = document.getElementById('default-address-toggle-circle');
+            const setDefaultCheckbox = document.getElementById('set-default');
+
+            if (toggleButton && toggleCircle && setDefaultCheckbox) {
+                toggleButton.addEventListener('click', function() {
+                    setDefaultCheckbox.checked = !setDefaultCheckbox.checked;
+                    if (setDefaultCheckbox.checked) {
+                        toggleButton.classList.remove('bg-gray-200');
+                        toggleButton.classList.add('bg-brand-green');
+                        toggleCircle.style.transform = 'translateX(1.25rem)'; // w-11 (2.75rem), circle w-5 (1.25rem), padding 0.5rem total. So 2.75 - 1.25 - 0.25 = 1.25
+                    } else {
+                        toggleButton.classList.remove('bg-brand-green');
+                        toggleButton.classList.add('bg-gray-200');
+                        toggleCircle.style.transform = 'translateX(0.125rem)'; // Small offset for padding
+                    }
+                });
+            }
+
+            const form = document.getElementById('add-address-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real app, you would send this data to a server.
+                    alert('新地址已保存 (原型功能)');
+                    // Optionally redirect or clear form
+                    window.location.href = 'shipping-address.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

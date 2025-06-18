@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>确认支付 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                        'wechat-green': '#07C160',
+                        'wechat-bg': '#F7F7F7',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Specific styles for payment page to ensure it overlays */
+        #payment-modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent; /* Changed from dimmed background */
+            z-index: 100; /* High z-index to appear on top */
+            display: flex; 
+            /* Removed align-items: flex-end; */
+        }
+        #payment-modal-content {
+            width: 100%;
+            height: 100vh; /* Changed from max-height to full height */
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+            /* bg-wechat-bg is applied via Tailwind class */
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-transparent max-w-414 mx-auto font-sans no-scrollbar">
+
+    <!-- Payment Page Container -->
+    <div id="payment-modal-container" class="hidden">
+        <!-- Payment Page Content -->
+        <div id="payment-modal-content" class="bg-wechat-bg shadow-xl w-full max-w-414 mx-auto"> <!-- Removed rounded-t-lg -->
+            <!-- Header -->
+            <header class="bg-white p-3 flex items-center border-b border-gray-200 sticky top-0 z-10">
+                <button id="payment-back-button" class="text-gray-600 hover:text-gray-800 mr-3">
+                    <i class="fas fa-arrow-left text-lg"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-gray-800 text-center flex-grow">确认支付</h1>
+                <!-- Placeholder for potential close X button on the right -->
+                <div class="w-6"></div> 
+            </header>
+
+            <!-- Merchant Info -->
+            <section class="py-6 px-4 text-center">
+                <div class="mb-2">
+                    <i class="fas fa-leaf text-brand-green text-3xl"></i>
+                </div>
+                <p class="text-gray-700 text-sm">绿邮件 GreenMail</p>
+                <h2 id="payment-amount" class="text-3xl font-bold text-gray-900 mt-2">¥0.00</h2>
+            </section>
+
+            <!-- Payment Method (Simplified for prototype) -->
+            <section class="px-4 mb-6">
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fab fa-weixin text-wechat-green text-2xl mr-3"></i>
+                            <span class="text-gray-800">微信支付</span>
+                        </div>
+                        <i class="fas fa-check-circle text-wechat-green text-xl"></i>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Payment Details (Optional - can be expanded) -->
+            <section class="px-4 mb-6 text-sm text-gray-500">
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="flex justify-between py-1">
+                        <span>商品</span>
+                        <span id="payment-item-name" class="text-gray-700">订阅服务</span>
+                    </div>
+                     <div class="flex justify-between py-1">
+                        <span>优惠</span>
+                        <span id="payment-discount" class="text-red-500">-¥0.00</span>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Confirm Payment Button -->
+            <footer class="p-4 sticky bottom-0 bg-wechat-bg">
+                <button id="confirm-payment-button" class="w-full bg-wechat-green hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors text-lg">
+                    立即支付
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script> <!-- This line will be removed by the loader script -->
+    <script>
+        // Specific script for payment page interaction
+        // This script is now intended to be executed AFTER payment.html is loaded into another page
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentModalContainer = document.getElementById('payment-modal-container');
+            const paymentBackButton = document.getElementById('payment-back-button');
+            const confirmPaymentButton = document.getElementById('confirm-payment-button');
+            const paymentAmountElement = document.getElementById('payment-amount');
+            const paymentItemNameElement = document.getElementById('payment-item-name');
+            // const paymentDiscountElement = document.getElementById('payment-discount'); // If needed
+
+            // This function will be called from other pages to show the modal
+            window.showPaymentModal = function(amount, itemName = '订阅服务', discount = 0) {
+                if (paymentModalContainer && paymentAmountElement && paymentItemNameElement) {
+                    paymentAmountElement.textContent = `¥${parseFloat(amount).toFixed(2)}`;
+                    paymentItemNameElement.textContent = itemName;
+                    // if(paymentDiscountElement) paymentDiscountElement.textContent = `-¥${parseFloat(discount).toFixed(2)}`;
+                    paymentModalContainer.classList.remove('hidden');
+                    // Prevent body scroll when modal is open
+                    document.body.style.overflow = 'hidden'; 
+                    // Ensure the main body of payment.html itself is not scrollable if it's just a modal
+                    document.body.classList.add('overflow-hidden'); 
+                }
+            }
+
+            function hidePaymentModal() {
+                if (paymentModalContainer) {
+                    paymentModalContainer.classList.add('hidden');
+                    document.body.style.overflow = 'auto'; // Restore body scroll
+                    document.body.classList.remove('overflow-hidden');
+                }
+            }
+
+            if (paymentBackButton) {
+                paymentBackButton.addEventListener('click', hidePaymentModal);
+            }
+
+            if (confirmPaymentButton) {
+                confirmPaymentButton.addEventListener('click', function() {
+                    const amount = paymentAmountElement.textContent;
+                    alert(`支付 ${amount} 成功！ (原型功能)`);
+                    hidePaymentModal();
+                    // Potentially redirect to a success page or clear cart etc.
+                    // window.location.href = 'index.html'; // Example redirect
+                });
+            }
+            
+            // Expose hide function if needed globally, or handle within this scope
+            window.hidePaymentModal = hidePaymentModal;
+
+            // If this payment.html is loaded directly (e.g. for testing), show the modal.
+            // In a real SPA, this page might not be directly navigable.
+            // For this multi-page prototype, we'll assume it's shown via JS call.
+            // To test directly: uncomment below
+            // showPaymentModal(99.00, "测试商品"); 
+        });
+    </script>
+</body>
+</html>

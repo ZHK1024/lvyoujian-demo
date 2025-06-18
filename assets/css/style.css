@@ -1,0 +1,38 @@
+/* Custom global styles can go here if needed, though Tailwind handles most things. */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure fixed bottom nav doesn't overlap content unnecessarily */
+/* body { padding-bottom: 64px; } /* Adjust if nav height changes */
+
+/* Style for active nav item - can be handled by JS or by adding a class directly in HTML for the current page */
+/* For example, if index.html is active: */
+/* nav a[href="index.html"] { color: #3A7D54; } */
+
+/* Basic button hover/active states if not fully covered by Tailwind variants */
+button:hover, a.button:hover {
+    opacity: 0.9;
+}
+button:active, a.button:active {
+    transform: scale(0.98);
+}
+
+/* Specific styling for privacy modal scrollbar if desired */
+#privacy-modal .overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+}
+#privacy-modal .overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: #3A7D54;
+    border-radius: 3px;
+}
+#privacy-modal .overflow-y-auto::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+/* Ensure the main content area is scrollable if it exceeds viewport height, excluding fixed nav */
+#main-content {
+    /* padding-bottom: 64px; /* Height of the bottom nav */
+    /* This padding is now handled by a spacer div in the HTML */
+}

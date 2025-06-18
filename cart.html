@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物袋 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body id="cart-page-identifier" class="bg-gray-50 max-w-414 mx-auto font-sans pb-32">
+
+    <header class="p-4 bg-white border-b sticky top-0 z-30">
+        <h1 class="text-xl font-bold text-brand-green text-center">购物袋</h1>
+    </header>
+
+    <main class="p-4">
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="space-y-4">
+            <!-- Sample Cart Item 1 -->
+            <div class="cart-item bg-white p-4 rounded-lg shadow flex items-start space-x-3">
+                <input type="checkbox" class="form-checkbox h-5 w-5 text-brand-green rounded mt-1 focus:ring-brand-green" checked>
+                <div class="flex-grow">
+                    <h3 class="font-semibold text-gray-800">春季盲盒订阅 - 月度</h3>
+                    <p class="text-sm text-gray-500">包含：龙井、碧螺春等</p>
+                    <p class="text-brand-green font-bold mt-1 item-price" data-price="99.00">¥99.00</p>
+                </div>
+                <div class="flex flex-col items-end space-y-2">
+                    <div class="flex items-center border rounded">
+                        <button onclick="changeQuantity(this, -1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 no-transform">-</button>
+                        <span class="item-quantity px-3 text-sm">1</span>
+                        <button onclick="changeQuantity(this, 1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 no-transform">+</button>
+                    </div>
+                    <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 text-xs no-transform">
+                        <i class="fas fa-trash-alt mr-1"></i>删除
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sample Cart Item 2 -->
+            <div class="cart-item bg-white p-4 rounded-lg shadow flex items-start space-x-3">
+                <input type="checkbox" class="form-checkbox h-5 w-5 text-brand-green rounded mt-1 focus:ring-brand-green" checked>
+                <div class="flex-grow">
+                    <h3 class="font-semibold text-gray-800">偏好订阅 - 季度 (红茶, 乌龙茶)</h3>
+                    <p class="text-sm text-gray-500">为您精选优质红茶与乌龙茶</p>
+                    <p class="text-brand-green font-bold mt-1 item-price" data-price="269.00">¥269.00</p>
+                </div>
+                <div class="flex flex-col items-end space-y-2">
+                    <div class="flex items-center border rounded">
+                        <button onclick="changeQuantity(this, -1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 no-transform">-</button>
+                        <span class="item-quantity px-3 text-sm">1</span>
+                        <button onclick="changeQuantity(this, 1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 no-transform">+</button>
+                    </div>
+                    <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 text-xs no-transform">
+                        <i class="fas fa-trash-alt mr-1"></i>删除
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty Cart Message (Initially Hidden) -->
+            <div id="empty-cart-message" class="hidden text-center py-10">
+                <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                <p class="text-gray-500">您的购物袋是空的</p>
+                <a href="subscription.html" class="mt-4 inline-block bg-brand-green text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700">去订阅中心看看</a>
+            </div>
+        </div>
+
+        <!-- Promotion Message -->
+        <div id="promotion-message" class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3 rounded-md text-sm hidden">
+            再加¥32享包邮!
+        </div>
+    </main>
+
+    <!-- Checkout Area -->
+    <footer class="fixed bottom-16 left-0 right-0 bg-white border-t p-4 flex justify-between items-center max-w-414 mx-auto z-30">
+        <div class="text-left">
+            <span class="text-sm text-gray-600">合计:</span>
+            <span id="total-price" class="text-xl font-bold text-brand-green">¥0.00</span>
+        </div>
+        <button class="bg-brand-green hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg">
+            立即下单
+        </button>
+    </footer>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16 max-w-414 mx-auto z-40">
+        <a href="index.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">首页</span>
+        </a>
+        <a href="subscription.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-calendar-alt text-xl"></i>
+            <span class="text-xs mt-1">订阅</span>
+        </a>
+        <a href="cart.html" class="text-center text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-shopping-bag text-xl"></i>
+            <span class="text-xs mt-1">购物袋</span>
+        </a>
+        <a href="profile.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">我的</span>
+        </a>
+    </nav>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

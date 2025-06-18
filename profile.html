@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 绿邮件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#3A7D54',
+                        'brand-light-green': '#E6F2E9',
+                    },
+                    maxWidth: {
+                        '414': '414px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body id="profile-page-identifier" class="bg-gray-50 max-w-414 mx-auto font-sans pb-16">
+
+    <!-- User Info Area -->
+    <header class="bg-brand-green text-white p-6 pt-10 text-center">
+        <img src="/assets/images/avatar.png" alt="User Avatar" class="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-white shadow">
+        <h2 class="text-xl font-semibold">茶友_小明</h2>
+    </header>
+
+    <!-- Function List -->
+    <main class="py-4">
+        <ul class="bg-white shadow overflow-hidden"> <!-- Removed px-2 from main, removed rounded-lg from ul -->
+            <li>
+                <a href="my-orders.html" class="flex items-center p-4 hover:bg-gray-50 transition border-b border-gray-100">
+                    <i class="fas fa-receipt text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">我的订单</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <li>
+                <a href="shipping-address.html" class="flex items-center p-4 hover:bg-gray-50 transition border-b border-gray-100">
+                    <i class="fas fa-map-marker-alt text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">收货地址</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <li>
+                <a href="customer-service.html" class="flex items-center p-4 hover:bg-gray-50 transition border-b border-gray-100">
+                    <i class="fas fa-headset text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">专属客服</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <li>
+                <a href="coupons.html" class="flex items-center p-4 hover:bg-gray-50 transition">
+                    <i class="fas fa-tags text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">优惠券</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <!-- Temporarily hidden options -->
+            <!--
+            <li>
+                <a href="#" class="flex items-center p-4 hover:bg-gray-50 transition border-b border-gray-100">
+                    <i class="fas fa-leaf text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">茶园故事</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-4 hover:bg-gray-50 transition border-b border-gray-100">
+                    <i class="fas fa-cog text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">设置</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-4 hover:bg-gray-50 transition">
+                    <i class="fas fa-gift text-xl text-brand-green w-8 text-center"></i>
+                    <span class="ml-3 text-gray-700 font-medium">我的积分</span>
+                    <i class="fas fa-chevron-right text-gray-400 ml-auto"></i>
+                </a>
+            </li>
+            -->
+        </ul>
+    </main>
+
+    <!-- Brand Declaration -->
+    <footer class="text-center py-8 px-4 hidden">
+        <p class="text-xs text-gray-500">每笔订单5%投入茶园保护基金</p>
+    </footer>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16 max-w-414 mx-auto z-40">
+        <a href="index.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">首页</span>
+        </a>
+        <a href="subscription.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-calendar-alt text-xl"></i>
+            <span class="text-xs mt-1">订阅</span>
+        </a>
+        <!-- <a href="cart.html" class="text-center text-gray-500 hover:text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-shopping-bag text-xl"></i>
+            <span class="text-xs mt-1">购物袋</span>
+        </a> -->
+        <a href="profile.html" class="text-center text-brand-green flex flex-col items-center flex-1 py-2">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">我的</span>
+        </a>
+    </nav>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
