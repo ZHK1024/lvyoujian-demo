@@ -513,3 +513,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Function to open subscription detail page
+function openSubscriptionDetail(type) {
+    window.location.href = `subscription-detail.html?type=${type}`;
+}
+
+// Make function globally available
+window.openSubscriptionDetail = openSubscriptionDetail;
