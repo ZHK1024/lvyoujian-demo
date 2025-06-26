@@ -13,6 +13,7 @@
                 extend: {
                     colors: {
                         'brand-green': '#3A7D54',
+                        'brand-light-green': '#E6F2E9',
                     },
                     maxWidth: {
                         '414': '414px',
@@ -29,53 +30,111 @@
     </header>
 
     <!-- Subscription Categories -->
-    <main class="p-4 space-y-4">
-        <!-- Blind Box Subscription Card -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onclick="openSubscriptionDetail('blind-box')">
-            <img src="/assets/images/tea1.png" alt="盲盒订阅" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold text-brand-green mb-2">盲盒订阅</h3>
-                <p class="text-sm text-gray-600 mb-3">根据不同茶叶制作的时间，和不同季节喝茶的习惯为您邮寄首选的茶叶。每月惊喜，探索茶的无限可能。</p>
-                <div class="flex justify-between items-center text-sm text-gray-500">
-                    <span>季节性茶叶搭配</span>
-                    <span class="text-brand-green font-medium">¥99起/月</span>
-                </div>
-            </div>
-        </div>
+    <main class="p-4 space-y-4 pb-20">
+        <!-- Hero Image -->
+        <section class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="/assets/images/tea1.png" alt="茶叶订阅" class="w-full h-64 object-cover">
+        </section>
 
-        <!-- Preference Subscription Card -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onclick="openSubscriptionDetail('preference')">
-            <img src="/assets/images/tea1.png" alt="偏好订阅" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold text-brand-green mb-2">偏好订阅</h3>
-                <p class="text-sm text-gray-600 mb-3">根据您的茶叶偏好定制专属订阅。选择喜爱的茶类，排除不喜欢的品种，打造个人专属茶叶体验。</p>
-                <div class="flex justify-between items-center text-sm text-gray-500">
-                    <span>个性化茶叶推荐</span>
-                    <span class="text-brand-green font-medium">¥99起/月</span>
-                </div>
+        <!-- Subscription Type Selection -->
+        <section class="bg-white rounded-lg shadow-md p-4">
+            <h2 class="text-lg font-semibold text-brand-green mb-4">选择订阅类型</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <button id="blind-box-option" class="subscription-option p-3 border-2 border-brand-green bg-brand-light-green rounded-lg text-center transition-all hover:bg-brand-light-green text-brand-green" data-type="blind-box">
+                    <div class="text-2xl mb-2">🎁</div>
+                    <div class="text-sm font-medium">盲盒订阅</div>
+                </button>
+                <button id="preference-option" class="subscription-option p-3 border-2 border-gray-200 rounded-lg text-center transition-all hover:bg-brand-light-green text-gray-700" data-type="preference">
+                    <div class="text-2xl mb-2">❤️</div>
+                    <div class="text-sm font-medium">偏好订阅</div>
+                </button>
+                <button id="custom-option" class="subscription-option p-3 border-2 border-gray-200 rounded-lg text-center transition-all hover:bg-brand-light-green text-gray-700" data-type="custom">
+                    <div class="text-2xl mb-2">⚙️</div>
+                    <div class="text-sm font-medium">自定义订阅</div>
+                </button>
             </div>
-        </div>
+        </section>
 
-        <!-- Custom Subscription Card -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onclick="openSubscriptionDetail('custom')">
-            <img src="/assets/images/tea1.png" alt="自定义订阅" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold text-brand-green mb-2">自定义订阅</h3>
-                <p class="text-sm text-gray-600 mb-3">完全由您做主的订阅方式。从精选茶库中挑选最多5种茶叶，创建属于您的专属茶叶邮筒。</p>
-                <div class="flex justify-between items-center text-sm text-gray-500">
-                    <span>自由选择茶叶品种</span>
-                    <span class="text-brand-green font-medium">¥99起/月</span>
+        <!-- Dynamic Content Area -->
+        <section id="subscription-details" class="block">
+            <!-- Subscription Description -->
+            <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                <h3 id="subscription-name" class="text-xl font-semibold text-brand-green mb-3">订阅名称</h3>
+                <p id="subscription-description" class="text-gray-600 mb-4">订阅描述内容</p>
+                <div id="subscription-features" class="space-y-2">
+                    <!-- Features will be populated by JavaScript -->
                 </div>
             </div>
-        </div>
+
+            <!-- Subscription Content (Dynamic based on type) -->
+            <div id="subscription-content" class="bg-white rounded-lg shadow-md p-4 mb-4">
+                <!-- Content will be populated by JavaScript based on subscription type -->
+            </div>
+
+            <!-- Price Tiers -->
+            <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                <h3 class="text-lg font-semibold text-brand-green mb-4">选择订阅周期</h3>
+                <div class="space-y-3">
+                    <label class="border rounded-lg p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                        <div>
+                            <span class="font-semibold text-gray-800">月度订阅</span>
+                            <p class="text-sm text-gray-600">每月配送，灵活订阅</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-brand-green font-bold mr-3">¥99</span>
+                            <input type="radio" name="subscription_tier" value="monthly" class="form-radio text-brand-green focus:ring-brand-green">
+                        </div>
+                    </label>
+                    <label class="border rounded-lg p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                        <div>
+                            <span class="font-semibold text-gray-800">季度订阅</span>
+                            <p class="text-sm text-gray-600">3个月配送，享受优惠</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-right mr-3">
+                                <span class="text-brand-green font-bold">¥269</span>
+                                <p class="text-xs text-green-600">省10%</p>
+                            </div>
+                            <input type="radio" name="subscription_tier" value="quarterly" class="form-radio text-brand-green focus:ring-brand-green">
+                        </div>
+                    </label>
+                    <label class="border rounded-lg p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                        <div>
+                            <span class="font-semibold text-gray-800">半年订阅</span>
+                            <p class="text-sm text-gray-600">6个月配送，更多优惠</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-right mr-3">
+                                <span class="text-brand-green font-bold">¥499</span>
+                                <p class="text-xs text-green-600">省15%</p>
+                            </div>
+                            <input type="radio" name="subscription_tier" value="half_yearly" class="form-radio text-brand-green focus:ring-brand-green">
+                        </div>
+                    </label>
+                    <label class="border rounded-lg p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors">
+                        <div>
+                            <span class="font-semibold text-gray-800">年度订阅</span>
+                            <p class="text-sm text-gray-600">12个月配送，最优价格</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-right mr-3">
+                                <span class="text-brand-green font-bold">¥899</span>
+                                <p class="text-xs text-green-600">省25%</p>
+                            </div>
+                            <input type="radio" name="subscription_tier" value="yearly" class="form-radio text-brand-green focus:ring-brand-green">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Purchase Button -->
+        <section class="bg-white rounded-lg shadow-md p-4">
+            <button id="buy-now-button" class="w-full bg-brand-green hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
+                立即购买
+            </button>
+        </section>
     </main>
-
-    <!-- Bottom Action Buttons -->
-    <footer class="fixed bottom-16 left-0 right-0 bg-white border-t p-4 flex gap-4 max-w-414 mx-auto z-30 hidden">
-        <button class="flex-1 bg-brand-green hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
-            立即购买
-        </button>
-    </footer>
 
     <!-- Bottom Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16 max-w-414 mx-auto z-40">
@@ -94,5 +153,276 @@
     </nav>
 
     <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSubscriptionType = 'blind-box'; // 默认选中盲盒订阅
+
+            // Subscription data (extracted from subscription-detail.html)
+            const subscriptionData = {
+                'blind-box': {
+                    name: '盲盒订阅',
+                    description: '根据不同茶叶制作的时间，和不同季节喝茶的习惯为您邮寄首选的茶叶。每月惊喜，探索茶的无限可能。',
+                    features: [
+                        '季节性茶叶搭配',
+                        '专业茶艺师精选',
+                        '每月不同主题',
+                        '包含茶叶知识卡片'
+                    ],
+                    content: `
+                        <h3 class="text-lg font-semibold text-brand-green mb-3">订阅内容</h3>
+                        <div class="border rounded-lg p-4 bg-gradient-to-r from-green-50 to-emerald-50">
+                            <div class="flex items-center mb-3">
+                                <div class="w-12 h-12 bg-brand-green rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-gift text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-800">茶叶惊喜盲盒</h4>
+                                    <p class="text-sm text-brand-green">每月精选·季节茶韵</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">每月为您精心挑选当季最优质的茶叶，包含绿茶、红茶、乌龙茶、白茶等不同品类，让您在每次开启时都能体验到茶叶的惊喜与美好。</p>
+                            <div class="grid grid-cols-2 gap-3 text-xs text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-leaf text-brand-green mr-1"></i>
+                                    <span>3-4种精选茶叶</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar text-brand-green mr-1"></i>
+                                    <span>每月15日配送</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-brand-green mr-1"></i>
+                                    <span>茶艺师精选</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-book text-brand-green mr-1"></i>
+                                    <span>含品茶指南</span>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'preference': {
+                    name: '偏好订阅',
+                    description: '根据您的茶叶偏好定制专属订阅。选择喜爱的茶类，排除不喜欢的品种，打造个人专属茶叶体验。',
+                    features: [
+                        '个性化茶叶推荐',
+                        '根据偏好智能匹配',
+                        '可随时调整偏好',
+                        '专属品茶建议'
+                    ],
+                    content: `
+                        <h3 class="text-lg font-semibold text-brand-green mb-3">设置您的茶叶偏好</h3>
+                        <p class="text-sm text-gray-600 mb-4">选择喜爱的茶类，我们将为您精选相应茶叶</p>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 border rounded-lg">
+                                <span class="text-gray-700">绿茶</span>
+                                <div class="flex space-x-3">
+                                    <button class="text-gray-300 hover:text-red-500 preference-heart"><i class="fas fa-heart text-xl"></i></button>
+                                    <button class="text-gray-300 hover:text-red-500 preference-ban"><i class="fas fa-ban text-xl"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 border rounded-lg">
+                                <span class="text-gray-700">红茶</span>
+                                <div class="flex space-x-3">
+                                    <button class="text-gray-300 hover:text-red-500 preference-heart"><i class="fas fa-heart text-xl"></i></button>
+                                    <button class="text-gray-300 hover:text-red-500 preference-ban"><i class="fas fa-ban text-xl"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 border rounded-lg">
+                                <span class="text-gray-700">乌龙茶</span>
+                                <div class="flex space-x-3">
+                                    <button class="text-gray-300 hover:text-red-500 preference-heart"><i class="fas fa-heart text-xl"></i></button>
+                                    <button class="text-gray-300 hover:text-red-500 preference-ban"><i class="fas fa-ban text-xl"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 border rounded-lg">
+                                <span class="text-gray-700">白茶</span>
+                                <div class="flex space-x-3">
+                                    <button class="text-gray-300 hover:text-red-500 preference-heart"><i class="fas fa-heart text-xl"></i></button>
+                                    <button class="text-gray-300 hover:text-red-500 preference-ban"><i class="fas fa-ban text-xl"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 border rounded-lg">
+                                <span class="text-gray-700">普洱茶</span>
+                                <div class="flex space-x-3">
+                                    <button class="text-gray-300 hover:text-red-500 preference-heart"><i class="fas fa-heart text-xl"></i></button>
+                                    <button class="text-gray-300 hover:text-red-500 preference-ban"><i class="fas fa-ban text-xl"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'custom': {
+                    name: '自定义订阅',
+                    description: '完全由您做主的订阅方式。从精选茶库中挑选最多12种茶叶，创建属于您的专属茶叶邮筒。',
+                    features: [
+                        '自由选择茶叶品种',
+                        '最多可选12种茶叶',
+                        '可随时更换茶叶',
+                        '专属茶叶邮筒'
+                    ],
+                    content: `
+                        <h3 class="text-lg font-semibold text-brand-green mb-3">选择您的专属茶叶</h3>
+                        <p class="text-sm text-gray-600 mb-4">从我们的精选茶库中挑选最多12种茶叶</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                西湖龙井 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                祁门红茶 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                福鼎白茶 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                径山茶 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                漳平水仙 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                            <button class="custom-tea-option p-3 border rounded-lg text-sm text-gray-700 hover:bg-green-50 hover:border-brand-green transition-colors flex justify-between items-center">
+                                武夷岩茶 <i class="fas fa-plus-circle text-gray-400"></i>
+                            </button>
+                        </div>
+                    `
+                }
+            };
+
+            // Add click event listeners to subscription options
+            const subscriptionOptions = document.querySelectorAll('.subscription-option');
+            subscriptionOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const subscriptionType = this.getAttribute('data-type');
+                    selectSubscriptionType(subscriptionType);
+                });
+            });
+
+            function selectSubscriptionType(type) {
+                currentSubscriptionType = type;
+                
+                // Update option styling
+                subscriptionOptions.forEach(option => {
+                    option.classList.remove('border-brand-green', 'bg-brand-light-green', 'text-brand-green');
+                    option.classList.add('border-gray-200', 'text-gray-700');
+                });
+                
+                const selectedOption = document.querySelector(`[data-type="${type}"]`);
+                selectedOption.classList.remove('border-gray-200', 'text-gray-700');
+                selectedOption.classList.add('border-brand-green', 'bg-brand-light-green', 'text-brand-green');
+
+                // Update content without scrolling
+                const data = subscriptionData[type];
+                document.getElementById('subscription-name').textContent = data.name;
+                document.getElementById('subscription-description').textContent = data.description;
+                document.getElementById('subscription-content').innerHTML = data.content;
+
+                // Update features
+                const featuresContainer = document.getElementById('subscription-features');
+                featuresContainer.innerHTML = '';
+                data.features.forEach(feature => {
+                    const featureElement = document.createElement('div');
+                    featureElement.className = 'flex items-center text-sm text-gray-600';
+                    featureElement.innerHTML = `<i class="fas fa-check text-brand-green mr-2"></i>${feature}`;
+                    featuresContainer.appendChild(featureElement);
+                });
+
+                // Initialize type-specific functionality
+                initializeTypeSpecificFeatures(type);
+            }
+
+            // Initialize default selection
+            selectSubscriptionType('blind-box');
+
+            function initializeTypeSpecificFeatures(type) {
+                if (type === 'preference') {
+                    // Add event listeners for preference toggles
+                    const toggles = document.querySelectorAll('.preference-heart, .preference-ban');
+                    toggles.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const icon = this.querySelector('i');
+                            const isHeart = icon.classList.contains('fa-heart');
+                            const isBan = icon.classList.contains('fa-ban');
+                            
+                            // Reset all buttons in this row
+                            const row = this.closest('.flex.justify-between');
+                            const allButtons = row.querySelectorAll('button');
+                            allButtons.forEach(btn => {
+                                const btnIcon = btn.querySelector('i');
+                                btnIcon.classList.remove('text-red-500');
+                                btnIcon.classList.add('text-gray-300');
+                            });
+
+                            // Toggle current button
+                            if (isHeart || isBan) {
+                                icon.classList.remove('text-gray-300');
+                                icon.classList.add('text-red-500');
+                            }
+                        });
+                    });
+                } else if (type === 'custom') {
+                    // Add event listeners for custom tea selection
+                    let selectedTeas = [];
+                    const maxTeas = 12;
+                    
+                    const teaOptions = document.querySelectorAll('.custom-tea-option');
+                    
+                    teaOptions.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const teaName = this.textContent.trim();
+                            const icon = this.querySelector('i');
+                            
+                            if (selectedTeas.includes(teaName)) {
+                                // Remove tea
+                                selectedTeas = selectedTeas.filter(t => t !== teaName);
+                                this.classList.remove('bg-green-100', 'border-brand-green', 'text-brand-green');
+                                icon.classList.remove('fa-check-circle', 'text-brand-green');
+                                icon.classList.add('fa-plus-circle', 'text-gray-400');
+                            } else {
+                                // Add tea if not exceeding max
+                                if (selectedTeas.length < maxTeas) {
+                                    selectedTeas.push(teaName);
+                                    this.classList.add('bg-green-100', 'border-brand-green', 'text-brand-green');
+                                    icon.classList.add('fa-check-circle', 'text-brand-green');
+                                    icon.classList.remove('fa-plus-circle', 'text-gray-400');
+                                } else {
+                                    alert(`最多只能选择 ${maxTeas} 种茶叶。`);
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+
+            // Add event listener for buy now button
+            const buyNowButton = document.getElementById('buy-now-button');
+
+            buyNowButton.addEventListener('click', function() {
+                const selectedTier = document.querySelector('input[name="subscription_tier"]:checked');
+                if (!selectedTier) {
+                    alert('请选择订阅周期');
+                    return;
+                }
+                
+                // Get price based on tier
+                const prices = {
+                    'monthly': 99,
+                    'quarterly': 269,
+                    'half_yearly': 499,
+                    'yearly': 899
+                };
+                
+                const price = prices[selectedTier.value] || 99;
+                const data = subscriptionData[currentSubscriptionType];
+                
+                // Here you would typically load the payment modal
+                if (window.loadAndShowPaymentPage) {
+                    window.loadAndShowPaymentPage(price, `${data.name} - ${selectedTier.value}`);
+                } else {
+                    alert(`立即购买 ${data.name} - ${selectedTier.value} ¥${price} (原型功能)`);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
